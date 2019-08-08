@@ -1,6 +1,6 @@
 ﻿namespace MetaApp.Services
 {
-    interface IScopedProcessingService
+    internal interface IScopedProcessingService
     {
         void DoWork();
     }
