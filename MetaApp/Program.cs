@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using MetaApp.WeatherClient;
 
 namespace MetaApp
 {
@@ -45,7 +46,6 @@ namespace MetaApp
                     configHost.SetBasePath(Directory.GetCurrentDirectory());
                     configHost.AddJsonFile("hostsettings.json", optional: true);
                     configHost.AddEnvironmentVariables(prefix: "PREFIX_");
-                    //configHost.AddCommandLine(args);
                 })
                 .ConfigureAppConfiguration((hostContext, configApp) =>
                 {
@@ -54,13 +54,11 @@ namespace MetaApp
                         $"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json",
                         optional: true);
                     configApp.AddEnvironmentVariables(prefix: "PREFIX_");
-                    //configApp.AddCommandLine(args);
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<CityList>(cities);
 
-                    //services.AddHostedService<LifetimeEventsHostedService>();
                     services.AddHostedService<TimerHostedService>();
 
                     services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
