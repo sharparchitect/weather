@@ -7,3 +7,4 @@ Multi-threaded solution is used in case when several cities are checked for weat
 Covered the functionality of parsing the console parameters with unit tests.
 
 It is implemented in C#, .NET Core 2.2, with Visual Studio 2019.
+
