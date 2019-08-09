@@ -6,5 +6,7 @@ Parsing parameters, checking the weather each 30 seconds, writing the results in
 Multi-threaded solution is used in case when several cities are checked for weather.
 Covered the functionality of parsing the console parameters with unit tests.
 
+Saving of the data received from the API has been not implemented yet due to lack of time.
+
 It is implemented in C#, .NET Core 2.2, with Visual Studio 2019.
 
