@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MetaApp.Services
 {
@@ -35,9 +35,9 @@ namespace MetaApp.Services
 
             using (var scope = Services.CreateScope())
             {
-                var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IScopedProcessingService>();
+                var processor = scope.ServiceProvider.GetRequiredService<IWeatherProcessor>();
 
-                scopedProcessingService.DoWork();
+                processor.Process();
             }
         }
 

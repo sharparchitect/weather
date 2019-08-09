@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MetaApp.Services;
+﻿using MetaApp.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MetaApp.Tests.Services
@@ -79,6 +76,68 @@ namespace MetaApp.Tests.Services
             var result = new CityManager(args).Validate();
 
             Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void Validate_TwoCitiesWithComma()
+        {
+            string[] args = new string[] { "weather", "--city", "Vilnius,", "Kyiv" };
+            var result = new CityManager(args).Validate();
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void Validate_ThreeCitiesWithCommas()
+        {
+            string[] args = new string[] { "weather", "--city", "Vilnius,", "Kyiv,", "Nicosia" };
+            var result = new CityManager(args).Validate();
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void Parse_OneCity()
+        {
+            string[] args = new string[] { "weather", "--city", "Vilnius" };
+            var result = new CityManager(args).Parse();
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Vilnius", result[0]);
+        }
+
+        [TestMethod]
+        public void Parse_TwoCities()
+        {
+            string[] args = new string[] { "weather", "--city", "Vilnius", "Kyiv" };
+            var result = new CityManager(args).Parse();
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Vilnius", result[0]);
+            Assert.AreEqual("Kyiv", result[1]);
+        }
+
+        [TestMethod]
+        public void Parse_TwoCitiesWithComma()
+        {
+            string[] args = new string[] { "weather", "--city", "Vilnius,", "Kyiv" };
+            var result = new CityManager(args).Parse();
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Vilnius", result[0]);
+            Assert.AreEqual("Kyiv", result[1]);
+        }
+
+        [TestMethod]
+        public void Parse_ThreeCitiesWithCommas()
+        {
+            string[] args = new string[] { "weather", "--city", "Vilnius,", "Kyiv,", "Nicosia" };
+            var result = new CityManager(args).Parse();
+
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("Vilnius", result[0]);
+            Assert.AreEqual("Kyiv", result[1]);
+            Assert.AreEqual("Nicosia", result[2]);
         }
     }
 }

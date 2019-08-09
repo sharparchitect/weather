@@ -2,7 +2,7 @@
   "profiles": {
     "MetaApp": {
       "commandName": "Project",
-      "commandLineArgs": "weather --city Vilnius Kyiv"
+      "commandLineArgs": "weather --city Vilnius, Kyiv, Vienna, Nicosia, Berlin"
     }
   }
 }

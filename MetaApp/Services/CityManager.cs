@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MetaApp.Services
+﻿namespace MetaApp.Services
 {
     public class CityManager
     {
@@ -25,12 +23,16 @@ namespace MetaApp.Services
             return null;
         }
 
-        public CityList ParseCities()
+        public CityList Parse()
         {
             CityList result = new CityList(_args.Length - 2);
             for (int i = 2; i < _args.Length; i++)
             {
-                result.Add(_args[i]);
+                string city = _args[i];
+                if (city[city.Length - 1] == ',')
+                    city = city.Substring(0, city.Length - 1);
+
+                result.Add(city);
             }
 
             return result;

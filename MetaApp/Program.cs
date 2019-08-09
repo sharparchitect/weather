@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using MetaApp.WeatherClient;
 
 namespace MetaApp
 {
@@ -29,7 +28,7 @@ namespace MetaApp
                 return;
             }
 
-            CityList cities = manager.ParseCities();
+            CityList cities = manager.Parse();
 
             var host = ConfigureHost(cities);
 
@@ -61,7 +60,9 @@ namespace MetaApp
 
                     services.AddHostedService<TimerHostedService>();
 
-                    services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+                    services.AddScoped<IWeatherProcessor, WeatherProcessor>();
+
+                    services.AddHttpClient();
                 })
                 .ConfigureLogging((hostContext, configLogging) =>
                 {
